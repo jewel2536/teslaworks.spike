@@ -12,15 +12,16 @@ export const doCreateUser = (id, username, email, role) =>
 export const onceGetUsers = () =>
   db.ref('users').once('value');
 
-export const getUser = (uemail) =>
+export const getUserRole = (uemail) =>
   db.ref('users').once('value').then(function(snapshot) {
     var users = (snapshot.val());
-    var role = "NAN";
+    var promise = "NAN";
     Object.keys(users).map(key =>
       (users[key].email === uemail)
-        ? role = users[key].role
+        ? promise = users[key].role
         : (users[key].role || "NAN")
     );
+    var role = promise.then(function(result) { return result; });
     return role;
   });
 
