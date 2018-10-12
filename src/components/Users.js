@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import withAuthorization from './withAuthorization';
 import { db } from '../firebase';
 
+import './Users.css';
+
 class UserPage extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,7 @@ class UserPage extends Component {
     db.onceGetUsers().then(snapshot =>
       this.setState({ users: snapshot.val() })
     );
+    db.getUser();
   }
 
   render() {
@@ -34,7 +37,7 @@ const UserList = ({ users }) =>
     <h2>List of Users</h2>
     <p>(Saved on Sign Up in Firebase Database)</p>
 
-    <table>
+    <table class="table">
       <thead>
         <tr>
           <th>Name</th>
@@ -44,7 +47,7 @@ const UserList = ({ users }) =>
       </thead>
       <tbody>
       {Object.keys(users).map(key =>
-        <tr>
+        <tr class={users[key].role}>
           <td key={key}>{users[key].username}</td>
           <td key={key}>{users[key].email}</td>
           <td key={key}>{users[key].role}</td>

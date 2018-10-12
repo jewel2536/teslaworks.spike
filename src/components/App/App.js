@@ -4,20 +4,23 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Navigation from './Navigation';
-import LandingPage from './Landing';
-import SignUpPage from './SignUp';
-import SignInPage from './SignIn';
-import PasswordForgetPage from './PasswordForget/PasswordForget';
-import HomePage from './Home';
-import AccountPage from './Account';
-import UserPage from './Users';
+import './App.css';
 
-import * as routes from '../constants/routes';
+import Navigation from './../Navigation/Navigation';
+import LandingPage from './../Landing';
+import SignUpPage from './../SignUp';
+import SignInPage from './../SignIn';
+import PasswordForgetPage from './../PasswordForget/PasswordForget';
+import HomePage from './../Home';
+import AccountPage from './../Account';
+import UserPage from './../Users';
 
-import withAuthentication from './withAuthentication';
+import * as routes from '../../constants/routes';
+
+import withAuthentication from './../withAuthentication';
 
 const App = () =>
+<div class='app-container'>
   <Router>
     <div>
       <Navigation />
@@ -31,5 +34,6 @@ const App = () =>
       <Route exact path={routes.USERS} component={UserPage} />
     </div>
   </Router>
+</div>
 
 export default withAuthentication(App);

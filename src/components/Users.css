@@ -1,0 +1,15 @@
+.ADMIN {
+  background-color: lightblue;
+}
+
+.OFFICER {
+  background-color: lightpink;
+}
+
+.PROJECTMANAGER {
+  background-color: lightgreen;
+}
+
+.MEMBER {
+  background-color: lightgray;
+}
