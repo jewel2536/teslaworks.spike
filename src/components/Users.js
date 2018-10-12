@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import withAuthorization from './withAuthorization';
-import withAdminAuthorization from './withAdminAuthorization'
+import withAuthorization from './withAuthorization/withAuthorization';
+import withRoleAuthorization from './withAuthorization/withRoleAuthorization';
 import { db } from '../firebase';
 
 import './Users.css';
@@ -59,4 +59,4 @@ const UserList = ({ users }) =>
 
 const authCondition = (authUser) => !!authUser;
 
-export default withAdminAuthorization(authCondition)(UserPage);
+export default withRoleAuthorization(authCondition, ["ADMIN", "OFFICER"])(UserPage);

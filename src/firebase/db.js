@@ -19,7 +19,24 @@ export const getUser = (uemail) =>
     Object.keys(users).map(key =>
       (users[key].email === uemail)
         ? role = users[key].role
-        : console.log(users[key].role || "NAN")
+        : (users[key].role || "NAN")
     );
     return role;
   });
+
+
+  export const getPermission = (uemail, allowedRoles) => {
+    var promise = db.ref('users').once('value').then(function(snapshot) {
+        var users = (snapshot.val());
+        var role = "NAN";
+        Object.keys(users).map(key =>
+          (users[key].email === uemail)
+            ? role = users[key].role
+            : (users[key].role || "NAN")
+        );
+        return role;
+      });
+    var role;
+    promise.then(function(result) { role = result; });
+    return allowedRoles.includes(role);
+}

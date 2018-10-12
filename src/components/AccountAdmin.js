@@ -3,7 +3,7 @@ import React from 'react';
 import AuthUserContext from './AuthUserContext';
 import { PasswordForgetForm } from './PasswordForget';
 import PasswordChangeForm from './PasswordChange';
-import withAuthorization from './withAuthorization';
+import withAdminAuthorization from './withAuthorization/withAdminAuthorization';
 
 const AdminPage = () =>
   <AuthUserContext.Consumer>
@@ -20,4 +20,4 @@ const AdminPage = () =>
 
 const authCondition = (authUser) => !!authUser && authUser.role === 'ADMIN';
 
-export default withAuthorization(authCondition)(AdminPage);
+export default withAdminAuthorization(authCondition)(AdminPage);
