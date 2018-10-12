@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import withAuthorization from './withAuthorization';
+import withAdminAuthorization from './withAdminAuthorization'
 import { db } from '../firebase';
 
 import './Users.css';
@@ -18,7 +19,6 @@ class UserPage extends Component {
     db.onceGetUsers().then(snapshot =>
       this.setState({ users: snapshot.val() })
     );
-    db.getUser();
   }
 
   render() {
@@ -59,4 +59,4 @@ const UserList = ({ users }) =>
 
 const authCondition = (authUser) => !!authUser;
 
-export default withAuthorization(authCondition)(UserPage);
+export default withAdminAuthorization(authCondition)(UserPage);

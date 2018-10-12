@@ -15,5 +15,11 @@ export const onceGetUsers = () =>
 export const getUser = (uemail) =>
   db.ref('users').once('value').then(function(snapshot) {
     var users = (snapshot.val());
-    console.log(users);
+    var role = "NAN";
+    Object.keys(users).map(key =>
+      (users[key].email === uemail)
+        ? role = users[key].role
+        : console.log(users[key].role || "NAN")
+    );
+    return role;
   });
