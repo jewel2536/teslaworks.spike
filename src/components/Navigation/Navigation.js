@@ -10,15 +10,10 @@ const Navigation = () =>
   <AuthUserContext.Consumer>
     {authUser =>
       authUser
-      ? <NavigationSwitch role={db.getUserRole(authUser.email)} />
+      ? <NavigationAuth />
       : <NavigationNonAuth />
     }
   </AuthUserContext.Consumer>
-
-const NavigationSwitch = ({ role }) => {
-  console.log(role);
-}
-
 
 const NavigationAuth = () =>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
