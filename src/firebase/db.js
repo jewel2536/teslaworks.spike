@@ -12,8 +12,32 @@ export const doCreateUser = (id, username, email, role) =>
 export const onceGetUsers = () =>
   db.ref('users').once('value');
 
-export const getUser = (uemail) =>
+export const getUserRole = (uemail) =>
   db.ref('users').once('value').then(function(snapshot) {
     var users = (snapshot.val());
-    console.log(users);
+    var promise = "NAN";
+    Object.keys(users).map(key =>
+      (users[key].email === uemail)
+        ? promise = users[key].role
+        : (users[key].role || "NAN")
+    );
+    var role = promise.then(function(result) { return result; });
+    return role;
   });
+
+
+  export const getPermission = (uemail, allowedRoles) => {
+    var promise = db.ref('users').once('value').then(function(snapshot) {
+        var users = (snapshot.val());
+        var role = "NAN";
+        Object.keys(users).map(key =>
+          (users[key].email === uemail)
+            ? role = users[key].role
+            : (users[key].role || "NAN")
+        );
+        return role;
+      });
+    var role;
+    promise.then(function(result) { role = result; });
+    return allowedRoles.includes(role);
+}

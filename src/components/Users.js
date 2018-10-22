@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 
+<<<<<<< HEAD
 import withAuthorization from './withAuthorization';
 import withAdminAuthorization from './withAdminAuthorization';
+=======
+import withAuthorization from './withAuthorization/withAuthorization';
+import withAdminAuthorization from './withAuthorization/withAdminAuthorization';
+import withRoleAuthorization from './withAuthorization/withRoleAuthorization';
+>>>>>>> 55956be3781f8ae9a7a68e11a8fa4f748ab1f1e9
 import { db } from '../firebase';
 
 import './Users.css';
@@ -19,7 +25,6 @@ class UserPage extends Component {
     db.onceGetUsers().then(snapshot =>
       this.setState({ users: snapshot.val() })
     );
-    db.getUser();
   }
 
   render() {
@@ -60,4 +65,8 @@ const UserList = ({ users }) =>
 
 const authCondition = (authUser) => !!authUser;
 
+<<<<<<< HEAD
 export default withAdminAuthorization(authCondition)(UserPage);
+=======
+export default withAdminAuthorization(authCondition, ["ADMIN", "OFFICER"])(UserPage);
+>>>>>>> 55956be3781f8ae9a7a68e11a8fa4f748ab1f1e9
