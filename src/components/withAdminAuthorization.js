@@ -1,21 +1,22 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { db } from './firebase';
 
 import AuthUserContext from './AuthUserContext';
-import { firebase } from '../firebase';
+import { firebase, db, auth } from '../firebase';
 import * as routes from '../constants/routes';
 
 const withAuthorization = (authCondition) => (Component) => {
   class WithAuthorization extends React.Component {
     componentDidMount() {
-      db.onceGetUsers().then(snapshot =>
-          this.setState({ users: snapshot.val() })
-        );
-        console.log(users);
       firebase.auth.onAuthStateChanged(authUser => {
-        if (!authCondition(authUser) && ) {
-          this.props.history.push(routes.SIGN_IN);
+        console.log(authUser);
+        var promise = db.getUser(authUser.email);
+        var role = "NAN";
+        promise.then(function(result) {
+          role = result;
+        })
+        if (!authCondition(authUser) || role != "ADMIN") {
+          this.props.history.push(routes.HOME);
         }
       });
     }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import withAuthorization from './withAuthorization';
-import withAdminAuthorization from './withAdminAuthorization';
 import { db } from '../firebase';
 
 import './Users.css';
@@ -44,6 +43,7 @@ const UserList = ({ users }) =>
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
+          <th>Update</th>
         </tr>
       </thead>
       <tbody>
@@ -52,6 +52,7 @@ const UserList = ({ users }) =>
           <td key={key}>{users[key].username}</td>
           <td key={key}>{users[key].email}</td>
           <td key={key}>{users[key].role}</td>
+          <td><button>Update</button></td>
         </tr>
       )}
       </tbody>
@@ -60,4 +61,4 @@ const UserList = ({ users }) =>
 
 const authCondition = (authUser) => !!authUser;
 
-export default withAdminAuthorization(authCondition)(UserPage);
+export default withAuthorization(authCondition)(UserPage);
